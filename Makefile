@@ -1,5 +1,5 @@
 
-IMAGE_NAME = haasgz.hand-china.com:34950/openshift-contrib/gitbook-s2i
+IMAGE_NAME = eliu/gitbook-s2i
 
 .PHONY: build
 build:

@@ -1,5 +1,5 @@
 
-# haasgz.hand-china.com:34950/openshift-contrib/gitbook-s2i
+# eliu/gitbook-s2i
 FROM node:8.4.0-alpine
 
 # TODO: Put the maintainer name in the image metadata
