@@ -1,6 +1,6 @@
 
 # eliu/gitbook-s2i
-FROM node:8.4.0-alpine
+FROM node:9-alpine
 
 # TODO: Put the maintainer name in the image metadata
 MAINTAINER Liu Hongyu <eliuhy@163.com>
