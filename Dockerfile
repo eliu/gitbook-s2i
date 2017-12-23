@@ -18,7 +18,7 @@ LABEL io.k8s.description="Gitbook Builder" \
      io.openshift.s2i.scripts-url="image:///usr/libexec/s2i"
 
 # TODO: Install required packages here:
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN apk add --no-cache bash 
 RUN npm install --global gitbook-cli \
     && gitbook fetch ${GITBOOK_VERSION} \
