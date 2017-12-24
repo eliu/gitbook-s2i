@@ -28,7 +28,7 @@ RUN echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf
 RUN apt-get update && apt-get install -y sudo --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && echo "1001 ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers \
-    && usermod -u 1001 1001
+    && useradd -u 1001 1001
 
 # TODO (optional): Copy the builder files into /opt/app-root
 # COPY ./<builder_folder>/ /opt/app-root/
