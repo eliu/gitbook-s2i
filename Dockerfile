@@ -24,6 +24,7 @@ RUN npm install --global gitbook-cli \
     && gitbook install \
     && rm -rf /tmp/*
 RUN chown -R 1001:1001 /opt/workspace
+RUN echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf
 
 # TODO (optional): Copy the builder files into /opt/app-root
 # COPY ./<builder_folder>/ /opt/app-root/
