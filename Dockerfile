@@ -1,6 +1,6 @@
 
 # eliu/gitbook-s2i
-FROM node:9-alpine
+FROM node:9-slim
 
 # TODO: Put the maintainer name in the image metadata
 MAINTAINER Liu Hongyu <eliuhy@163.com>
@@ -18,15 +18,12 @@ LABEL io.k8s.description="Gitbook Builder" \
      io.openshift.s2i.scripts-url="image:///usr/libexec/s2i"
 
 # TODO: Install required packages here:
-# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
-RUN apk add --no-cache bash 
 RUN npm install --global gitbook-cli \
     && gitbook fetch ${GITBOOK_VERSION} \
     && npm cache verify \
     && gitbook install \
     && rm -rf /tmp/*
 RUN chown -R 1001:1001 /opt/workspace
-RUN echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.d/00-alpine.conf
 
 # TODO (optional): Copy the builder files into /opt/app-root
 # COPY ./<builder_folder>/ /opt/app-root/
@@ -44,7 +41,7 @@ USER 1001
 WORKDIR /opt/workspace
 
 # TODO: Set the default port for applications built using this image
-EXPOSE 4000 35729
+EXPOSE 4000
 
 # TODO: Set the default CMD for the image
 CMD ["/usr/libexec/s2i/usage"]
