@@ -24,7 +24,10 @@ RUN npm install --global gitbook-cli \
     && gitbook install \
     && rm -rf /tmp/*
 RUN chown -R 1001:1001 /opt/workspace
-RUN echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf && sysctl --system
+RUN echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf
+RUN apt-get update && apt-get install -y sudo --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/* \
+    && echo "1001 ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
 
 # TODO (optional): Copy the builder files into /opt/app-root
 # COPY ./<builder_folder>/ /opt/app-root/
