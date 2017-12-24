@@ -13,7 +13,7 @@ ENV GITBOOK_VERSION=3.2.3 \
 # TODO: Set labels used in OpenShift to describe the builder image
 LABEL io.k8s.description="Gitbook Builder" \
      io.k8s.display-name="Gitbook Builder 1" \
-     io.openshift.expose-services="4000:http,35729:http" \
+     io.openshift.expose-services="4000:http" \
      io.openshift.tags="gitbook" \
      io.openshift.s2i.scripts-url="image:///usr/libexec/s2i"
 
@@ -27,7 +27,8 @@ RUN chown -R 1001:1001 /opt/workspace
 RUN echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf
 RUN apt-get update && apt-get install -y sudo --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
-    && echo "1001 ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers
+    && echo "1001 ALL=(ALL) NOPASSWD:ALL" | tee -a /etc/sudoers \
+    && usermod -u 1001 1001
 
 # TODO (optional): Copy the builder files into /opt/app-root
 # COPY ./<builder_folder>/ /opt/app-root/
